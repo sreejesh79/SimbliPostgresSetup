@@ -4,6 +4,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     mobile VARCHAR(20) NOT NULL,
     refresh_token VARCHAR(255) NULL,
+    status SMALLINT DEFAULT 0 NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
@@ -37,3 +38,13 @@ INSERT INTO roles (machine_name, name) VALUES
 ('customer', 'Customer'),
 ('vendor', 'Vendor'),
 ('consumer', 'Consumer');
+
+CREATE TABLE emails_otp (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    otp VARCHAR(6) NOT NULL,
+    otp_token VARCHAR(255) NOT NULL,
+    expiry BIGINT NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
