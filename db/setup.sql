@@ -3,7 +3,7 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     mobile VARCHAR(20) NOT NULL,
-    refresh_token VARCHAR(255) NULL,
+    refresh_token TEXT NULL,
     status SMALLINT DEFAULT 0 NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
@@ -26,9 +26,9 @@ CREATE TABLE roles (
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-CREATE TABLE user_roles (
-    user_id INTEGER REFERENCES users (id),
-    role_id INTEGER REFERENCES roles (id)
+CREATE TABLE users_roles_roles (
+    "usersId" INTEGER REFERENCES users (id),
+    "rolesId" INTEGER REFERENCES roles (id)
 );
 
 INSERT INTO roles (machine_name, name) VALUES 
@@ -43,7 +43,7 @@ CREATE TABLE emails_otp (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     otp VARCHAR(6) NOT NULL,
-    otp_token VARCHAR(255) NOT NULL,
+    otp_token TEXT NOT NULL,
     expiry BIGINT NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
