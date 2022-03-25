@@ -48,3 +48,41 @@ CREATE TABLE emails_otp (
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
+
+CREATE TABLE colors_pallete (
+    id SERIAL PRIMARY KEY,
+    primary_color VARCHAR(6) NOT NULL,
+    secodary_color VARCHAR(6) NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE brandings (
+    id SERIAL PRIMARY KEY,
+    logo TEXT NOT NULL,
+    "colorId" INTEGER REFERENCES colors_pallete (id) DEFAULT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE companies (
+    id SERIAL PRIMARY KEY,
+    url VARCHAR(255) UNIQUE NOT NULL,
+    fullname VARCHAR(255) UNIQUE NOT NULL,
+    pan VARCHAR(255) UNIQUE NOT NULL,
+    "brandingId" INTEGER REFERENCES brandings (id) DEFAULT NULL,
+    created_by INTEGER REFERENCES users (id) NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE branches (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    branch_address TEXT NOT NULL,
+    gst_address TEXT DEFAULT NULL,
+    "companyId" INTEGER REFERENCES companies (id) DEFAULT NULL,
+    created_by INTEGER REFERENCES users (id) NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
