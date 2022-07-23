@@ -10,5 +10,5 @@ Docker compose setup with create initial tables
 - Run docker-compose down
 
 ###### To Remove the volume along with shutdown (required for creating tables again on docker compose up):
-- Run docker-compose down -v db
+- Run docker-compose down -v db 
 
