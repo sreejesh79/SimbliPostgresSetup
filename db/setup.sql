@@ -33,10 +33,10 @@ INSERT INTO roles (machine_name, name) VALUES
 ('vendor', 'Vendor'),
 ('consumer', 'Consumer');
 
-CREATE TABLE emails_otp (
+CREATE TABLE register_magiclinks (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
-    token TEXT NOT NULL,
+    token TEXT UNIQUE NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
